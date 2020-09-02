@@ -1,3 +1,5 @@
+Minor note:- Since none of the node modules were uploaded during git push, it is recommended that you use `yarn install` or `npm install` before running the application.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

@@ -4,11 +4,12 @@ import "react-table-6/react-table.css";
 import { Link } from "react-router-dom";
 import SearchBar from "./SearchBar";
 import axios from "axios";
+import { connect } from "react-redux";
 
-export default function Main() {
+function Main(props) {
   const url = "https://reqres.in/api/users?page=1";
   const [users, setUsers] = useState([]);
-
+  //setUsers(props.user);
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
@@ -17,6 +18,7 @@ export default function Main() {
       });
   }, []);
 
+  //console.log(users);
   function deleteUser(id, first_name, last_name, email) {
     //console.log(`${id}, ${first_name}, ${last_name}, ${email}`);
     if (
@@ -96,7 +98,7 @@ export default function Main() {
               >
                 <button className="btn btn-info">Update</button>
               </Link>
-              <div style={{ display: "inline" }}>
+              <div style={{ display: "inline", marginLeft: 5 }}>
                 <button
                   className="btn btn-danger"
                   onClick={() =>
@@ -135,10 +137,17 @@ export default function Main() {
         </Link>
       </div>
       <div>
-        <ReactTable data={users} columns={columns} />
+        <ReactTable data={users} columns={columns} minRows="10" />
       </div>
     </div>
   );
 }
 
 /**/
+const mapStateToProps = (state) => {
+  return {
+    users: state.users,
+  };
+};
+
+export default connect(mapStateToProps)(Main);
