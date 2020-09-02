@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ReactTable from "react-table-6";
 import "react-table-6/react-table.css";
-import DeleteUser from "./DeleteUser";
 import { Link } from "react-router-dom";
 import SearchBar from "./SearchBar";
 import axios from "axios";
@@ -20,12 +19,6 @@ export default function Main() {
 
   function deleteUser(id, first_name, last_name, email) {
     //console.log(`${id}, ${first_name}, ${last_name}, ${email}`);
-    var val = {
-      id: id,
-      first_name: first_name,
-      last_name: last_name,
-      email: email,
-    };
     if (
       window.confirm(`Do you really want to delete the following row?
     id: ${id}
@@ -130,7 +123,7 @@ export default function Main() {
         <h1>My Customers</h1>
       </center>
       <div>
-        <SearchBar />
+        <SearchBar params={users} />
       </div>
       <div
         style={{ padding: 10, display: "flex", justifyContent: "flex - end" }}

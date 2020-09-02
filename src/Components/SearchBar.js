@@ -1,22 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 
-export default function SearchBar() {
-  function handleInputChange() {}
+export default function SearchBar(params) {
+  const [word, setWord] = useState("");
+  let data = params;
+  function handleInputChange() {
+    if (word !== "") {
+      let output = JSON.stringify(
+        data.params.find(
+          (record) =>
+            record.first_name === word ||
+            record.last_name === word ||
+            record.email === word
+        )
+      );
+      output !== undefined ? alert(output) : alert("Not found");
+    }
+  }
   return (
     <div className="searchForm">
-      <form style={{ width: "100%", padding: 10 }}>
-        <input
-          type="text"
-          id="filter"
-          placeholder="Search for names or email......"
-          onChange={handleInputChange}
-        />
-      </form>
+      <input
+        type="text"
+        id="filter"
+        value={word}
+        placeholder="Search for names or email......"
+        onChange={(e) => setWord(e.target.value)}
+      />
+      <button
+        className="btn btn-success"
+        onClick={handleInputChange}
+        style={{ marginLeft: 5 }}
+      >
+        Search
+      </button>
     </div>
   );
 }
-/*<div>
-        {this.state.data.map((i) => (
-          <p>{i.name}</p>
-        ))}
-      </div>>*/
